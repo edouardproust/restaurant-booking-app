@@ -1,0 +1,35 @@
+@import "./variables";
+@import "./header";
+@import "./main";
+@import "./footer";
+@import "./card";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+section {
+  padding: $section-spacing 0;
+}
+
+.section-container {
+  max-width: $page-content-max-width;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  flex: 1;
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  & img {
+    width: 100%;
+  }
+}

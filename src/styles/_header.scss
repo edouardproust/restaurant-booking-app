@@ -1,0 +1,21 @@
+header {
+  padding: 24px 0;
+  .row {
+    justify-content: space-between;
+  }
+  img {
+    max-width: $logo-max-width;
+  }
+  nav {
+    ul {
+      display: flex;
+      list-style: none;
+      height: 100%;
+      li {
+        display: flex;
+        align-items: center;
+        margin: 0 10px;
+      }
+    }
+  }
+}

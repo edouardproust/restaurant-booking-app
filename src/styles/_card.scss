@@ -1,0 +1,27 @@
+.card {
+  background-color: white;
+  border: solid 1px gray;
+  border-radius: $radius-basis;
+  overflow: hidden;
+  .body {
+    padding: 20px;
+  }
+  .photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-position: center;
+    background-size: cover;
+  }
+  &.testimonial {
+    img {
+      border-radius: 100%;
+    }
+    .author {
+      align-items: center;
+      .name {
+        margin-left: 10px;
+      }
+    }
+  }
+}

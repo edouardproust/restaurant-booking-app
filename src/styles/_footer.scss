@@ -1,0 +1,9 @@
+footer {
+  padding: $section-spacing 0;
+  .section-container {
+    display: flex;
+  }
+  img {
+    max-width: 60px;
+  }
+}
