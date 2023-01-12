@@ -22,7 +22,7 @@ export default function CardTestimonial(props) {
             style={{
               backgroundImage: `url(${props.testimonial.photo})`,
             }}></div>
-          <div className="name">{props.testimonial.name}</div>
+          <div className="name lead">{props.testimonial.name}</div>
         </div>
         <div className="content">
           <p>{props.testimonial.content}</p>

@@ -1,22 +1,22 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBicycle } from "@fortawesome/free-solid-svg-icons";
+import Button from "./Button";
 
-export default function CardDish(props) {
+export default function CardDish({ photo, name, price, content }) {
   return (
     <article className="col card dish">
-      <div className="head">
-        <img src={props.dish.photo} alt={`Photo of ${props.dish.name}`} />
-      </div>
+      <div className="head" style={{ backgroundImage: `url(${photo})` }}></div>
       <div className="body">
         <div className="row">
-          <h3 className="title">{props.dish.name}</h3>
-          <div className="price">${props.dish.price}</div>
+          <h3 className="title">{name}</h3>
+          <div className="price lead">${price}</div>
         </div>
-        <p className="content">{props.dish.content}</p>
-        <button className="btn btn-secondary btn-icon">
+        <p className="content">{content}</p>
+
+        <Button classes="btn-secondary">
           <FontAwesomeIcon icon={faBicycle} />
           Order a delivery
-        </button>
+        </Button>
       </div>
     </article>
   );

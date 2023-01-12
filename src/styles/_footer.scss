@@ -1,7 +1,17 @@
 footer {
-  padding: $section-spacing 0;
-  .section-container {
-    display: flex;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: $section-spacing $mobile-padding;
+  color: $color-secondary-3;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  a {
+    color: $color-secondary-3;
+  }
+  svg {
+    margin-right: space(0.5);
   }
   img {
     max-width: 60px;

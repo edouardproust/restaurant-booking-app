@@ -1,5 +1,5 @@
 header {
-  padding: 24px 0;
+  padding: 24px $mobile-padding;
   .row {
     justify-content: space-between;
   }
@@ -7,14 +7,74 @@ header {
     max-width: $logo-max-width;
   }
   nav {
-    ul {
+    display: flex;
+    align-items: center;
+    .nav-menu {
       display: flex;
+      flex-wrap: wrap;
       list-style: none;
-      height: 100%;
       li {
         display: flex;
         align-items: center;
         margin: 0 10px;
+        a {
+          border-bottom: 4px solid transparent;
+          border-top: 4px solid transparent;
+          transition: all 0.2s;
+          &:hover,
+          &.active {
+            border-bottom: 4px solid;
+          }
+        }
+      }
+    }
+    .hamburger {
+      display: none;
+      .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: #101010;
+      }
+    }
+    @include for-size(md) {
+      .nav-menu {
+        position: absolute;
+        z-index: 99;
+        right: -100%;
+        top: 100px;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        padding: space(1);
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: $shadow-base;
+        &.active {
+          z-index: 999;
+          right: 0;
+        }
+        li {
+          margin-bottom: space(0.5);
+        }
+      }
+      .hamburger {
+        display: block;
+        cursor: pointer;
+        &.active {
+          .bar:nth-child(1) {
+            transform: translateY(4px) rotate(45deg);
+          }
+          .bar:nth-child(2) {
+            display: none;
+          }
+          .bar:nth-child(3) {
+            transform: translateY(-4px) rotate(-45deg);
+          }
+        }
       }
     }
   }

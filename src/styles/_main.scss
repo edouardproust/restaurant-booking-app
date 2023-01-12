@@ -1,5 +1,83 @@
+// Sections
+
 #testimonials,
-#hero,
-footer {
-  background-color: rgb(222, 222, 222);
+#hero {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+#hero {
+  background-attachment: fixed;
+  .col:first-child {
+    width: 50%;
+  }
+  @include for-size(lg) {
+    .col:first-child {
+      width: 100%;
+    }
+  }
+  .bg-overlay {
+    background-color: rgba(0, 0, 0, $bg-opacity);
+  }
+  color: $color-secondary-3;
+}
+
+#testimonials {
+  .bg-overlay {
+    background-color: rgba(255, 255, 255, $bg-opacity);
+  }
+  h2 {
+    text-align: center;
+  }
+}
+
+#about {
+  .row {
+    align-items: center;
+  }
+  h2 {
+    margin-bottom: 0;
+  }
+  .col:last-child {
+    position: relative;
+    min-height: 460px;
+  }
+  .photo-adrian,
+  .photo-mario {
+    height: 80%;
+    width: 55%;
+    position: absolute;
+    border-radius: $radius-basis;
+    background-position: center;
+    background-size: cover;
+  }
+  .photo-adrian {
+    top: 0;
+    left: 0;
+  }
+  .photo-mario {
+    bottom: 0px;
+    right: 0px;
+  }
+  @include for-size(md) {
+    .photo-adrian,
+    .photo-mario {
+      position: static;
+      width: 100%;
+      height: 220px;
+    }
+    .photo-adrian {
+      margin-bottom: space(1);
+    }
+  }
+  @include for-size(sm) {
+    .photo-adrian,
+    .photo-mario {
+      height: 320px;
+    }
+    .photo-adrian {
+      margin-bottom: space(1);
+    }
+  }
 }

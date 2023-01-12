@@ -1,0 +1,57 @@
+body {
+  overflow-x: hidden;
+}
+
+section {
+  padding: $section-spacing $mobile-padding;
+}
+
+.section-container {
+  max-width: $page-content-max-width;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  &.row-title {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: space(2);
+    h2 {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.col {
+  min-width: 240px;
+  margin: space(1) 0;
+  flex: 1;
+  & img {
+    width: 100%;
+  }
+}
+
+$gaps: (10, 20, 30, 40, 50);
+@each $n in $gaps {
+  .gap-#{$n} > *:not(:last-child) {
+    margin-right: #{$n}px;
+  }
+}
+
+.bg-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, $bg-opacity);
+}
+
+.section-container {
+  &:not(.block) {
+    position: relative;
+  }
+  z-index: 1;
+}
