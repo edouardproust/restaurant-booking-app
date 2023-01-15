@@ -1,7 +1,7 @@
 import "./styles/app.scss";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Main from "./components/Main";
+import MainHome from "./components/MainHome";
 
 function App() {
   const mainMenu = [
@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Header mainMenu={mainMenu} />
-      <Main />
+      <MainHome />
       <Footer mainMenu={mainMenu} />
     </>
   );

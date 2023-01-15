@@ -18,7 +18,7 @@ import adrian from "../images/adrian.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
 
-export default function Main() {
+export default function MainHome() {
   const dishes = [
     {
       name: "Greek Salad",
