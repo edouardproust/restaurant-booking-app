@@ -16,4 +16,14 @@ footer {
   img {
     max-width: 60px;
   }
+  @include for-size(md) {
+    * {
+      text-align: center;
+    }
+  }
+}
+
+#copyright {
+  font-size: 0.8rem;
+  opacity: 0.5;
 }

@@ -34,11 +34,7 @@ const SuccessPopup = () => {
             title="gmaps"
             width="420"
             height="220"
-            src="https://maps.google.com/maps?hl=en&amp;q=58 Middle Point Rd San Francisco, California(CA), 94124+(Little Lemon)&amp;ie=UTF8&amp;t=&amp;z=11&amp;iwloc=B&amp;output=embed"
-            frameborder="0"
-            scrolling="no"
-            marginheight="0"
-            marginwidth="0"></iframe>
+            src="https://maps.google.com/maps?hl=en&amp;q=58 Middle Point Rd San Francisco, California(CA), 94124+(Little Lemon)&amp;ie=UTF8&amp;t=&amp;z=11&amp;iwloc=B&amp;output=embed"></iframe>
           <div className="gmaps">
             <div className="gmaps-sub">
               <a href="https://googlemapsembed.net/">Embed Google Map</a>

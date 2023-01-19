@@ -36,3 +36,8 @@ select {
   flex: 1;
   margin-bottom: space(1);
 }
+
+.input-error {
+  color: red;
+  font-size: 0.8rem;
+}

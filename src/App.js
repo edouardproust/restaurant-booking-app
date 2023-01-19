@@ -9,6 +9,8 @@ import Order from "./components/pages/Order";
 import Login from "./components/pages/Login";
 import Booking from "./components/pages/Booking/Booking";
 
+const siteName = "Little Lemon Chicago";
+
 function App() {
   const mainMenu = [
     { label: "Home", route: "/" },
@@ -28,7 +30,7 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-      <Footer mainMenu={mainMenu} />
+      <Footer mainMenu={mainMenu} siteName={siteName} />
     </>
   );
 }

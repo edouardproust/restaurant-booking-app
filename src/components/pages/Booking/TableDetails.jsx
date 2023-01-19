@@ -5,12 +5,17 @@ import PageTitle from "../../SectionPageTitle";
 // Images
 import restoIndoor from "../../../images/resto-indoor.jpg";
 import cooks from "../../../images/cooks.jpg";
+import { Field } from "formik";
 
-const TableDetails = ({ updateStep, handleChange, data }) => {
+const TableDetails = ({ updateStep, formik }) => {
+  const { errors, touched, isValid, dirty } = formik;
   const next = (e) => {
     e.preventDefault();
     updateStep("next");
   };
+
+  console.log(isValid);
+  console.log(errors);
 
   return (
     <>
@@ -22,38 +27,29 @@ const TableDetails = ({ updateStep, handleChange, data }) => {
             <div className="row">
               <div className="form-group">
                 <label className="text-strong">Date</label>
-                <input
-                  type="date"
-                  name="date"
-                  value={data["date"].value}
-                  onChange={handleChange("date")}
-                />
+                <Field type="date" name="date" />
+                {errors.date && touched.date && (
+                  <div className="input-error">{errors.date}</div>
+                )}
               </div>
               <div className="form-group">
                 <label className="text-strong">Time</label>
-                <input
-                  type="time"
-                  name="time"
-                  value={data["time"].value}
-                  onChange={handleChange("time")}
-                />
+                <Field type="time" name="time" />
+                {errors.time && touched.time && (
+                  <div className="input-error">{errors.time}</div>
+                )}
               </div>
             </div>
             <div className="form-group">
               <label className="text-strong">Dinners</label>
-              <input
-                type="number"
-                name="dinners"
-                value={data["dinners"].value}
-                onChange={handleChange("dinners")}
-              />
+              <Field type="number" name="dinners" min="1" max="30" />
+              {errors.dinners && touched.dinners && (
+                <div className="input-error">{errors.dinners}</div>
+              )}
             </div>
             <div className="form-group">
               <label className="text-strong">Occasion</label>
-              <select
-                name="occasion"
-                value={data["occasion"].value}
-                onChange={handleChange("occasion")}>
+              <Field as="select" name="occasion">
                 {[
                   "None",
                   "Birthday",
@@ -65,33 +61,25 @@ const TableDetails = ({ updateStep, handleChange, data }) => {
                     {option}
                   </option>
                 ))}
-              </select>
+              </Field>
             </div>
             <div className="form-group">
               <label className="text-strong">Seating options</label>
               {["Indoor", "Outdoor"].map((option, i) => (
                 <label key={option}>
-                  <input
-                    type="radio"
-                    name="seatingOptions"
-                    value={option}
-                    checked={data["seatingOptions"].value === option}
-                    onChange={handleChange("seatingOptions")}
-                  />
+                  <Field type="radio" name="seatingOptions" value={option} />
                   {option}
                 </label>
               ))}
             </div>
             <div className="form-group">
               <label className="text-strong">Special request</label>
-              <textarea
-                name="specialRequest"
-                value={data["specialRequest"].value}
-                onChange={handleChange("specialRequest")}
-              />
+              <Field as="textarea" name="specialRequest" />
             </div>
             <div className="row">
-              <Button onClick={next}>Next</Button>
+              <Button onClick={next} disabled={!dirty || !isValid}>
+                Next
+              </Button>
             </div>
           </div>
           <div className="col">

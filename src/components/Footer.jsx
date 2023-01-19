@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-export default function Footer(props) {
+export default function Footer({ mainMenu, siteName }) {
   const phone = "(415) 206-1786";
   const email = "contact@littlelemon.com";
   const social = [
@@ -24,14 +24,17 @@ export default function Footer(props) {
     <footer style={{ backgroundImage: `url(${footerBg})` }}>
       <div className="bg-overlay dark"></div>
       <div className="section-container">
-        <div className="row gap-20">
+        <div className="row gap-20 wrap">
           <div className="col">
             <img src={logoIcon} alt="Icon Little Lemon restaurant" />
+            <div id="copyright">
+              © {siteName} {new Date().getFullYear()}
+            </div>
           </div>
           <div className="col">
             <h3>Links</h3>
             <ul>
-              {props.mainMenu.map((link) => (
+              {mainMenu.map((link) => (
                 <li key={uuid()}>
                   <Link to={link.route}>{link.label}</Link>
                 </li>

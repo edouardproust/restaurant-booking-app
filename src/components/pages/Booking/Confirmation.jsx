@@ -1,26 +1,17 @@
-import { useState } from "react";
 import Button from "../../Button";
 import Section from "../../Section";
 import PageTitle from "../../SectionPageTitle";
-import SuccessPopup from "./SuccessPopup";
 import ccv from "../../../images/ccv.png";
+import { Field } from "formik";
 
-const Confirmation = ({ updateStep, handleChange, data }) => {
-  const [isConfirmed, setIsConfirmed] = useState(false);
-  const confirm = (e) => {
-    e.preventDefault();
-    setIsConfirmed(true);
-  };
+const Confirmation = ({ updateStep, formik }) => {
+  const { values, errors, touched, isValid, dirty } = formik;
   const previous = (e) => {
     e.preventDefault();
     updateStep("prev");
   };
-  console.log(Object.values(data));
   return (
     <>
-      <div className={`popup ${!isConfirmed ? "hidden" : ""}`}>
-        <SuccessPopup />
-      </div>
       <PageTitle title="Booking confirmation" />
       <Section>
         <div className="row gap-2 wrap">
@@ -31,43 +22,35 @@ const Confirmation = ({ updateStep, handleChange, data }) => {
             </p>
             <div className="form-group">
               <label className="text-strong">Card number</label>
-              <input
-                type="number"
-                name="cardNumber"
-                value={data["cardNumber"].value}
-                onChange={handleChange("cardNumber")}
-              />
+              <Field type="number" name="cardNumber" />
+              {errors.cardNumber && touched.cardNumber && (
+                <div className="input-error">{errors.cardNumber}</div>
+              )}
             </div>
             <div className="form-group">
               <label className="text-strong">First name & Last name</label>
-              <input
-                type="text"
-                name="cardName"
-                value={data["cardName"].value}
-                onChange={handleChange("cardName")}
-              />
+              <Field type="text" name="nameOnCard" />
+              {errors.nameOnCard && touched.nameOnCard && (
+                <div className="input-error">{errors.nameOnCard}</div>
+              )}
             </div>
             <div className="row">
               <div className="col">
                 <div className="form-group">
                   <label className="text-strong">Expiration date</label>
-                  <input
-                    type="date"
-                    name="expDate"
-                    value={data["expDate"].value}
-                    onChange={handleChange("expDate")}
-                  />
+                  <Field type="date" name="expDate" />
+                  {errors.expDate && touched.expDate && (
+                    <div className="input-error">{errors.expDate}</div>
+                  )}
                 </div>
               </div>
               <div className="col">
                 <div className="form-group">
                   <label className="text-strong">CCV</label>
-                  <input
-                    type="number"
-                    name="ccv"
-                    value={data["ccv"].value}
-                    onChange={handleChange("ccv")}
-                  />
+                  <Field type="number" name="ccv" />
+                  {errors.ccv && touched.ccv && (
+                    <div className="input-error">{errors.ccv}</div>
+                  )}
                 </div>
               </div>
               <div className="ccv">
@@ -78,29 +61,20 @@ const Confirmation = ({ updateStep, handleChange, data }) => {
               <Button classes="btn-secondary" onClick={previous}>
                 Back
               </Button>
-              <Button onClick={confirm}>Confirm</Button>
+              <Button type="submit" disabled={!dirty || !isValid}>
+                Confirm
+              </Button>
             </div>
           </div>
           <div className="col card card-light booking-recap">
             <div className="body">
-              <h3>Table details</h3>
-              {Object.values(data)
-                .filter((input) => input.step === 1 && input.value)
-                .map((input) => (
-                  <li>
-                    <span className="text-strong">{input.label}:</span>{" "}
-                    {input.value}
-                  </li>
-                ))}
+              <h3>Table details</h3>TODO
               <h3>Client informations</h3>
-              {Object.values(data)
-                .filter((input) => input.step === 2 && input.value)
-                .map((input) => (
-                  <li>
-                    <span className="text-strong">{input.label}:</span>{" "}
-                    {input.value}
-                  </li>
-                ))}
+              {Object.entries(values).map((val) => (
+                <li>
+                  {val[0]}: {val[1]}
+                </li>
+              ))}
             </div>
           </div>
         </div>

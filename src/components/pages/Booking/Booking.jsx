@@ -2,25 +2,46 @@ import { useState } from "react";
 import PersonalDetails from "./PersonalDetails";
 import TableDetails from "./TableDetails";
 import Confirmation from "./Confirmation";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import SuccessPopup from "./SuccessPopup";
+
+const initialValues = {
+  date: new Date().toJSON().slice(0, 10),
+  time: new Date().toLocaleTimeString(),
+  dinners: 2,
+  occasion: "none",
+  seatingOptions: "Indoor",
+  specialRequest: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  cardNumber: "",
+  nameOnCard: "",
+  expDate: "",
+  ccv: "",
+};
+
+const validationSchema = Yup.object().shape({
+  date: Yup.date().required("Required"),
+  time: Yup.string().required("Required"),
+  dinners: Yup.number().required("Required"),
+  firstName: Yup.string().required("Required"),
+  lastName: Yup.string().required("Required"),
+  email: Yup.string().required("Required"),
+  password: Yup.string().required("Required"),
+  cardNumber: Yup.string().required("Required"),
+  nameOnCard: Yup.string().required("Required"),
+  expDate: Yup.string().required("Required"),
+  ccv: Yup.string().required("Required"),
+});
 
 export default function Booking() {
   const [step, setStep] = useState(1);
-  const [data, setData] = useState({
-    date: { label: "Date", value: "2023-01-19", step: 1 },
-    time: { label: "Time", value: "03:14", step: 1 },
-    dinners: { label: "Dinners", value: 1, step: 1 },
-    occasion: { label: "Occasion", value: "none", step: 1 },
-    seatingOptions: { label: "Seating options", value: "Indoor", step: 1 },
-    specialRequest: { label: "Special request", value: "", step: 1 },
-    firstname: { label: "First name", value: "", step: 2 },
-    lastname: { label: "Last name", value: "", step: 2 },
-    email: { label: "Email", value: "", step: 2 },
-    password: { label: "Password", value: "", step: 2 },
-    cardNumber: { label: "Card number", value: "", step: 3 },
-    cardName: { label: "First name / Last name", value: "", step: 3 },
-    expDate: { label: "Expiration date", value: "", step: 3 },
-    ccv: { label: "CCV", value: "", step: 3 },
-  });
+  const [isSubmitted, setSubmitted] = useState(false);
+
+  const onSubmit = (values) => setSubmitted(true);
 
   const updateStep = (action = "next") => {
     switch (action) {
@@ -34,39 +55,30 @@ export default function Booking() {
         throw new Error("Action should be either 'prev' or 'next'.");
     }
   };
-  const handleChange = (input) => (e) => {
-    setData({
-      ...data,
-      [input]: { ...data[input], value: e.target.value },
-    });
-  };
 
-  switch (step) {
-    case 1:
-      return (
-        <TableDetails
-          updateStep={updateStep}
-          handleChange={handleChange}
-          data={data}
-        />
-      );
-    case 2:
-      return (
-        <PersonalDetails
-          updateStep={updateStep}
-          handleChange={handleChange}
-          data={data}
-        />
-      );
-    case 3:
-      return (
-        <Confirmation
-          updateStep={updateStep}
-          handleChange={handleChange}
-          data={data}
-        />
-      );
-    default:
-    // Do nothing
-  }
+  return (
+    <>
+      <div className={`popup ${!isSubmitted ? "hidden" : ""}`}>
+        <SuccessPopup />
+      </div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}>
+        {(formik) => (
+          <Form>
+            {step === 1 ? (
+              <TableDetails formik={formik} updateStep={updateStep} />
+            ) : step === 2 ? (
+              <PersonalDetails formik={formik} updateStep={updateStep} />
+            ) : step === 3 ? (
+              <Confirmation formik={formik} updateStep={updateStep} />
+            ) : (
+              ""
+            )}
+          </Form>
+        )}
+      </Formik>
+    </>
+  );
 }

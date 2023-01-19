@@ -3,13 +3,15 @@ export default function Button({
   classes,
   type = "button",
   onClick,
+  disabled,
 }) {
   return (
     <>
       <button
         type={type}
         className={classes ? "btn " + classes : "btn btn-primary"}
-        onClick={onClick}>
+        onClick={onClick}
+        disabled={disabled}>
         {children}
       </button>
     </>

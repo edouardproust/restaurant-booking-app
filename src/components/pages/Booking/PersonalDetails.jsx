@@ -1,8 +1,10 @@
+import { Field } from "formik";
 import Button from "../../Button";
 import Section from "../../Section";
 import PageTitle from "../../SectionPageTitle";
 
-const PersonalDetails = ({ updateStep, handleChange, data }) => {
+const PersonalDetails = ({ updateStep, formik }) => {
+  const { values, errors, touched, isValid, dirty } = formik;
   const next = (e) => {
     e.preventDefault();
     updateStep("next");
@@ -22,59 +24,50 @@ const PersonalDetails = ({ updateStep, handleChange, data }) => {
             <div className="row">
               <div className="form-group">
                 <label className="text-strong">First name</label>
-                <input
-                  type="text"
-                  name="firstname"
-                  value={data["firstname"].value}
-                  onChange={handleChange("firstname")}
-                />
+                <Field type="text" name="firstName" />
+                {errors.firstName && touched.firstName && (
+                  <div className="input-error">{errors.firstName}</div>
+                )}
               </div>
               <div className="form-group">
                 <label className="text-strong">Last name</label>
-                <input
-                  type="text"
-                  name="lastname"
-                  value={data["lastname"].value}
-                  onChange={handleChange("lastname")}
-                />
+                <Field type="text" name="lastName" />
+                {errors.lastName && touched.lastName && (
+                  <div className="input-error">{errors.lastName}</div>
+                )}
               </div>
             </div>
             <div className="form-group">
               <label className="text-strong">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={data["email"].value}
-                onChange={handleChange("email")}
-              />
+              <Field type="email" name="email" />
+              {errors.email && touched.email && (
+                <div className="input-error">{errors.email}</div>
+              )}
             </div>
             <div className="form-group">
               <label className="text-strong">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={data["password"].value}
-                onChange={handleChange("password")}
-              />
+              <Field type="password" name="password" />
+              {errors.password && touched.password && (
+                <div className="input-error">{errors.password}</div>
+              )}
             </div>
             <div className="row">
               <Button classes="btn-secondary" onClick={previous}>
                 Back
               </Button>
-              <Button onClick={next}>Next</Button>
+              <Button onClick={next} disabled={!dirty || !isValid}>
+                Next
+              </Button>
             </div>
           </div>
           <div className="col card card-light booking-recap">
             <div className="body">
               <h3>Table details</h3>
-              {Object.values(data)
-                .filter((input) => input.step === 1 && input.value)
-                .map((input) => (
-                  <li>
-                    <span className="text-strong">{input.label}:</span>{" "}
-                    {input.value}
-                  </li>
-                ))}
+              {Object.entries(values).map((val) => (
+                <li>
+                  {val[0]}: {val[1]}
+                </li>
+              ))}
             </div>
           </div>
         </div>
