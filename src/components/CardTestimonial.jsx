@@ -8,7 +8,7 @@ export default function CardTestimonial(props) {
   const halfStar = stars !== props.testimonial.notation ? 1 : null;
 
   return (
-    <article className="col card testimonial">
+    <article className="col card card-testimonial">
       <div className="body">
         <div className="stars">
           {[...Array(stars)].map(() => (

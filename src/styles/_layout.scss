@@ -2,6 +2,13 @@ body {
   overflow-x: hidden;
 }
 
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+// Sections
+
 section {
   padding: $section-spacing $mobile-padding;
 }
@@ -9,11 +16,58 @@ section {
 .section-container {
   max-width: $page-content-max-width;
   margin: auto;
+  &:not(.block) {
+    position: relative;
+  }
+  z-index: 1;
 }
+
+.bg-light {
+  background-color: $color-secondary-3;
+}
+
+.bg-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  &.dark {
+    background-color: rgba(0, 0, 0, $bg-opacity);
+  }
+  &.light {
+    background-color: rgba(255, 255, 255, $bg-opacity);
+  }
+}
+
+// Flexbox (row + Column)
 
 .row {
   display: flex;
   flex-wrap: wrap;
+  margin-left: space(-0.5);
+  margin-right: space(-0.5);
+  @include for-size(md) {
+    &.wrap > .col {
+      flex: 100%;
+    }
+  }
+  // Gaps
+  $gaps: (1, 2, 3, 4, 5);
+  // default gap
+  & > * {
+    margin: space(0.5) !important;
+  }
+  @each $n in $gaps {
+    &.gap-#{$n} {
+      // Align rows left and right
+      margin-left: space(-$n/2);
+      margin-right: space(-$n/2); // Apply gap to columns
+      & > * {
+        margin: space($n/2) !important;
+      }
+    }
+  }
   &.row-title {
     justify-content: space-between;
     align-items: center;
@@ -25,33 +79,8 @@ section {
 }
 
 .col {
-  min-width: 240px;
-  margin: space(1) 0;
   flex: 1;
   & img {
     width: 100%;
   }
-}
-
-$gaps: (10, 20, 30, 40, 50);
-@each $n in $gaps {
-  .gap-#{$n} > *:not(:last-child) {
-    margin-right: #{$n}px;
-  }
-}
-
-.bg-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, $bg-opacity);
-}
-
-.section-container {
-  &:not(.block) {
-    position: relative;
-  }
-  z-index: 1;
 }

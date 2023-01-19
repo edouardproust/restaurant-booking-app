@@ -54,6 +54,14 @@ a {
   &:hover {
     border-bottom: 1px solid;
   }
+  &.btn-link,
+  &.img-link {
+    border-bottom: none;
+    transition: transform 0.3s;
+  }
+  &.img-link:hover {
+    transform: scale(1.04);
+  }
 }
 
 li {
@@ -63,9 +71,9 @@ li {
 
 .lead {
   font-size: 1.3rem;
-  line-height: 1.5rem;
+  line-height: 1.85rem;
   font-weight: 300;
-  margin-bottom: space(1);
+  margin-bottom: space(1.5);
 }
 
 .text-light {

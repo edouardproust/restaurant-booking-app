@@ -1,0 +1,38 @@
+// Reset style
+input,
+textarea,
+select {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+// New style
+
+label {
+  display: block;
+}
+
+input:not([type="radio"]),
+textarea,
+select {
+  width: 100%;
+  min-width: 80px;
+}
+
+input[type="radio"] {
+  margin-right: space(0.5);
+}
+
+input,
+textarea,
+select {
+  padding: 14px;
+  border-radius: $radius-basis;
+  border: 2px solid $color-secondary-3;
+}
+
+.form-group {
+  flex: 1;
+  margin-bottom: space(1);
+}

@@ -62,17 +62,18 @@ header {
         }
       }
       .hamburger {
+        overflow: hidden;
         display: block;
         cursor: pointer;
         &.active {
           .bar:nth-child(1) {
-            transform: translateY(4px) rotate(45deg);
+            transform: translateY(8px) rotate(45deg);
           }
           .bar:nth-child(2) {
-            display: none;
+            transform: translateX(-30px);
           }
           .bar:nth-child(3) {
-            transform: translateY(-4px) rotate(-45deg);
+            transform: translateY(-8px) rotate(-45deg);
           }
         }
       }

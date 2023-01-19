@@ -1,0 +1,82 @@
+.popup {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(2, 2, 2, 0.8);
+  z-index: 99;
+  transition: all 0.3s;
+  &-container {
+    position: relative;
+    overflow-x: auto;
+    background-color: white;
+    border-radius: $radius-basis;
+    padding: space(1);
+    width: 50vh;
+    height: 50vh;
+    h3 {
+      font-size: 2rem;
+      margin-bottom: space(1);
+    }
+    .close {
+      position: absolute;
+      top: space(1);
+      right: space(1);
+      transition: transform 0.3s;
+      &:hover {
+        transform: rotate(180deg);
+      }
+    }
+    .content {
+      align-content: right;
+    }
+    ul {
+      margin-left: 18px;
+      margin-bottom: space(1);
+    }
+    li {
+      list-style: disc;
+    }
+  }
+}
+
+// Google Maps
+
+#gmaps {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.gmaps {
+  position: absolute;
+  width: 80%;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  color: #000;
+  text-align: center;
+  &-sub {
+    overflow: auto;
+    position: absolute;
+    height: 0pt;
+    width: 0pt;
+  }
+}
+
+.nvs {
+  position: relative;
+  text-align: right;
+  height: 325px;
+  width: 643px;
+}
+#gmap_canvas img {
+  max-width: none !important;
+  background: none !important;
+}

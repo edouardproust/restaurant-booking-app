@@ -1,8 +1,8 @@
 .card {
-  margin: space(0.5);
   background-color: white;
   border-radius: $radius-basis;
   overflow: hidden;
+  min-width: 240px;
   .body {
     padding: space(1);
   }
@@ -17,15 +17,16 @@
     background-position: center;
     background-size: cover;
   }
-  &.dish {
+  &-light {
     .head {
-      height: 200px;
+      height: 240px;
       width: 100%;
       background-position: center;
       background-size: cover;
     }
     .body {
       background-color: $color-secondary-3;
+      height: 100%;
     }
     .row {
       justify-content: space-between;
@@ -36,7 +37,7 @@
       margin-top: space(1);
     }
   }
-  &.testimonial {
+  &-testimonial {
     box-shadow: $shadow-base;
     img {
       border-radius: 100%;
@@ -56,6 +57,15 @@
     }
     .content {
       margin: $spacing-base 0;
+    }
+  }
+}
+
+.card.booking-recap {
+  h3 {
+    margin-bottom: space(0.5);
+    &:not(:first-child) {
+      margin-top: space(1);
     }
   }
 }

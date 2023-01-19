@@ -8,6 +8,7 @@ import {
   faPhone,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Footer(props) {
   const phone = "(415) 206-1786";
@@ -21,7 +22,7 @@ export default function Footer(props) {
 
   return (
     <footer style={{ backgroundImage: `url(${footerBg})` }}>
-      <div className="bg-overlay"></div>
+      <div className="bg-overlay dark"></div>
       <div className="section-container">
         <div className="row gap-20">
           <div className="col">
@@ -32,7 +33,7 @@ export default function Footer(props) {
             <ul>
               {props.mainMenu.map((link) => (
                 <li key={uuid()}>
-                  <a href={link.url}>{link.label}</a>
+                  <Link to={link.route}>{link.label}</Link>
                 </li>
               ))}
             </ul>

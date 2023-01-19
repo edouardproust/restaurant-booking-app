@@ -1,21 +1,33 @@
 import "./styles/app.scss";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import MainHome from "./components/MainHome";
+// Routes
+import { Routes, Route } from "react-router-dom";
+import Homepage from "./components/pages/Home";
+import About from "./components/pages/About";
+import Order from "./components/pages/Order";
+import Login from "./components/pages/Login";
+import Booking from "./components/pages/Booking/Booking";
 
 function App() {
   const mainMenu = [
-    { label: "Home", url: "#a" },
-    { label: "About", url: "#b" },
-    { label: "Reservation", url: "#c" },
-    { label: "Order online", url: "#d" },
-    { label: "Login", url: "#e" },
+    { label: "Home", route: "/" },
+    { label: "About", route: "/about" },
+    { label: "Booking", route: "/booking" },
+    { label: "Order online", route: "/order" },
+    { label: "Login", route: "/login" },
   ];
 
   return (
     <>
       <Header mainMenu={mainMenu} />
-      <MainHome />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
       <Footer mainMenu={mainMenu} />
     </>
   );
