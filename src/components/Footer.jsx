@@ -24,12 +24,9 @@ export default function Footer({ mainMenu, siteName }) {
     <footer style={{ backgroundImage: `url(${footerBg})` }}>
       <div className="bg-overlay dark"></div>
       <div className="section-container">
-        <div className="row gap-20 wrap">
+        <div className="row gap-2 wrap">
           <div className="col">
             <img src={logoIcon} alt="Icon Little Lemon restaurant" />
-            <div id="copyright">
-              © {siteName} {new Date().getFullYear()}
-            </div>
           </div>
           <div className="col">
             <h3>Links</h3>
@@ -79,6 +76,9 @@ export default function Footer({ mainMenu, siteName }) {
             </ul>
           </div>
         </div>
+      </div>
+      <div id="copyright">
+        © {siteName} {new Date().getFullYear()}
       </div>
     </footer>
   );

@@ -10,10 +10,17 @@
   transition: all 300ms;
   svg {
     margin-right: 8px;
+    &.mg-left {
+      margin-left: 8px;
+      margin-right: 0;
+    }
   }
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: $color-primary-dark;
     color: white;
+  }
+  &:disabled {
+    opacity: 0.6;
   }
   &-sm {
     padding: 10px 20px;

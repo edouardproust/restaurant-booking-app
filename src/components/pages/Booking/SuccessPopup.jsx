@@ -12,7 +12,7 @@ const SuccessPopup = () => {
         </div>
       </Link>
       <div className="content">
-        <h3>Confirmation Success!</h3>
+        <h3>Your reservation has been successfully completed.</h3>
         <p>
           Your reservation has been saved. We are waiting for you{" "}
           <b>at Little Lemon, 122 Main Street, Chicago</b> on{" "}
@@ -32,8 +32,8 @@ const SuccessPopup = () => {
         <div id="gmaps">
           <iframe
             title="gmaps"
-            width="420"
-            height="220"
+            width="500"
+            height="280"
             src="https://maps.google.com/maps?hl=en&amp;q=58 Middle Point Rd San Francisco, California(CA), 94124+(Little Lemon)&amp;ie=UTF8&amp;t=&amp;z=11&amp;iwloc=B&amp;output=embed"></iframe>
           <div className="gmaps">
             <div className="gmaps-sub">

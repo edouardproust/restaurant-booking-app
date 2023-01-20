@@ -3,10 +3,22 @@ footer {
   background-size: cover;
   background-position: center;
   padding: $section-spacing $mobile-padding;
+  padding-bottom: 0;
   color: $color-secondary-3;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  .section-container {
+    .col:first-child {
+      display: flex;
+      align-items: center;
+    }
+    @include for-size(md) {
+      .col:first-child {
+        display: block;
+      }
+    }
+  }
   a {
     color: $color-secondary-3;
   }
@@ -24,6 +36,12 @@ footer {
 }
 
 #copyright {
-  font-size: 0.8rem;
+  margin-top: space(4);
+  margin-left: -$mobile-padding;
+  margin-right: -$mobile-padding;
+  text-align: center;
+  padding: space(2) $mobile-padding;
+  font-size: 0.94rem;
   opacity: 0.5;
+  border-top: solid 1px rgba(255, 255, 255, 0.445);
 }
