@@ -13,14 +13,15 @@ label {
   display: block;
 }
 
-input:not([type="radio"]),
+input:not([type="radio"], [type="checkbox"]),
 textarea,
 select {
   width: 100%;
   min-width: 80px;
 }
 
-input[type="radio"] {
+input[type="radio"],
+input[type="checkbox"] {
   margin-right: space(0.5);
 }
 

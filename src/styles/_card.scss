@@ -59,13 +59,21 @@
       margin: $spacing-base 0;
     }
   }
-}
-
-.card.booking-recap {
-  h3 {
-    margin-bottom: space(0.5);
-    &:not(:first-child) {
-      margin-top: space(1);
+  &-booking-recap {
+    position: relative;
+    background-size: cover;
+    .body {
+      position: relative;
+      z-index: 2;
+    }
+    h3 {
+      margin-bottom: space(0.5);
+      &:not(:first-child) {
+        margin-top: space(1);
+      }
+    }
+    .bg-overlay.light {
+      background-color: rgba(255, 255, 255, 0.9);
     }
   }
 }

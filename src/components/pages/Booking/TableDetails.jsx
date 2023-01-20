@@ -1,5 +1,7 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 // Components
 import Button from "../../Button";
 import ImagesCol from "../../ImagesCol";
@@ -12,21 +14,30 @@ import cooks from "../../../images/cooks.jpg";
 const TableDetails = ({ updateStep, setFormData }) => {
   const initialValues = {
     date: new Date().toJSON().slice(0, 10),
-    time: new Date().toLocaleTimeString(),
-    dinners: 2,
+    time: new Date().getHours() + ":" + new Date().getMinutes(),
+    dinners: 1,
     occasion: "none",
     seatingOptions: "Indoor",
     specialRequest: "",
   };
+
   const validationSchema = Yup.object().shape({
-    date: Yup.date().required("Required"),
+    date: Yup.date()
+      .required("Required")
+      .min(new Date().toJSON().slice(0, 10), "Must be today or later"),
     time: Yup.string().required("Required"),
-    dinners: Yup.number().required("Required"),
+    dinners: Yup.number()
+      .required("Required")
+      .min(1, "You must reserve at least 1 dinner.")
+      .max(30, "You can reserve up to 20 dinners."),
+    specialRequest: Yup.string()
+      .min(3, "3 characters minimum")
+      .max(200, "200 characters maximum"),
   });
 
-  const next = () => {
+  const next = (values) => {
     updateStep("next");
-    setFormData("TODO");
+    setFormData([{ ...values }]);
   };
 
   return (
@@ -40,7 +51,7 @@ const TableDetails = ({ updateStep, setFormData }) => {
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={next}>
-              {({ errors, touched, isValid, dirty }) => (
+              {({ errors, touched, isValid }) => (
                 <Form>
                   <div className="row">
                     <div className="form-group">
@@ -69,7 +80,7 @@ const TableDetails = ({ updateStep, setFormData }) => {
                     <label className="text-strong">Occasion</label>
                     <Field as="select" name="occasion">
                       {[
-                        "None",
+                        "--- Choose one ---",
                         "Birthday",
                         "Engagement",
                         "Wedding",
@@ -96,11 +107,23 @@ const TableDetails = ({ updateStep, setFormData }) => {
                   </div>
                   <div className="form-group">
                     <label className="text-strong">Special request</label>
-                    <Field as="textarea" name="specialRequest" />
+                    <Field
+                      as="textarea"
+                      name="specialRequest"
+                      rows="3"
+                      placeholder="Add any comment here."
+                    />
+                    {errors.specialRequest && touched.specialRequest && (
+                      <div className="input-error">{errors.specialRequest}</div>
+                    )}
                   </div>
                   <div className="row">
-                    <Button type="submit" disabled={!dirty || !isValid}>
-                      Next
+                    <Button type="submit" disabled={!isValid}>
+                      Next{" "}
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        className="mg-left"
+                      />
                     </Button>
                   </div>
                 </Form>

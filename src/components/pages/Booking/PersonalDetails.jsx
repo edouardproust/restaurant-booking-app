@@ -1,9 +1,13 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import YupPassword from "yup-password";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 // Components
 import Button from "../../Button";
 import Section from "../../Section";
 import PageTitle from "../../SectionPageTitle";
+import CardBookingRecap from "./CardBookingRecap";
 
 const PersonalDetails = ({ updateStep, formData, setFormData }) => {
   const initialValues = {
@@ -13,16 +17,29 @@ const PersonalDetails = ({ updateStep, formData, setFormData }) => {
     password: "",
   };
 
+  YupPassword(Yup);
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("Required"),
-    lastName: Yup.string().required("Required"),
-    email: Yup.string().required("Required"),
-    password: Yup.string().required("Required"),
+    firstName: Yup.string()
+      .required("Required")
+      .min(2, "Too short")
+      .max(100, "Too long"),
+    lastName: Yup.string()
+      .required("Required")
+      .min(2, "Too short")
+      .max(100, "Too long"),
+    email: Yup.string()
+      .email("Invalid email")
+      .required("Required")
+      .min(5, "Too short")
+      .max(100, "Too long"),
+    password: Yup.string().password().required("Required"),
   });
 
-  const next = () => {
+  const next = (values) => {
     updateStep("next");
-    setFormData("TODO");
+    const valuesStep2 = { ...values };
+    delete valuesStep2["password"];
+    setFormData([...formData, { ...valuesStep2 }]);
   };
   const previous = () => {
     updateStep("prev");
@@ -32,15 +49,14 @@ const PersonalDetails = ({ updateStep, formData, setFormData }) => {
     <>
       <PageTitle title="Personal informations" />
       <Section>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={next}>
-          {({ values, errors, touched, isValid, dirty }) => (
-            <div className="row gap-2 wrap">
-              <div className="col">
-                <p className="lead">Sign-up to collect points</p>
-
+        <div className="row gap-2 wrap">
+          <div className="col">
+            <p className="lead">Sign-up to collect points</p>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={next}>
+              {({ errors, touched, isValid, dirty }) => (
                 <Form>
                   <div className="row">
                     <div className="form-group">
@@ -69,7 +85,10 @@ const PersonalDetails = ({ updateStep, formData, setFormData }) => {
                     <label className="text-strong">Password</label>
                     <Field type="password" name="password" />
                     {errors.password && touched.password && (
-                      <div className="input-error">{errors.password}</div>
+                      <div className="input-error">
+                        {errors.password.charAt(0).toUpperCase() +
+                          errors.password.slice(1)}
+                      </div>
                     )}
                   </div>
                   <div className="row">
@@ -77,24 +96,36 @@ const PersonalDetails = ({ updateStep, formData, setFormData }) => {
                       Back
                     </Button>
                     <Button type="submit" disabled={!dirty || !isValid}>
-                      Next
+                      Next{" "}
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        className="mg-left"
+                      />
                     </Button>
                   </div>
                 </Form>
-              </div>
-              <div className="col card card-light booking-recap">
-                <div className="body">
-                  <h3>Table details</h3>
-                  {Object.entries(values).map((val) => (
-                    <li>
-                      {val[0]}: {val[1]}
-                    </li>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </Formik>
+              )}
+            </Formik>
+          </div>
+          <CardBookingRecap>
+            <h3>Table details</h3>
+            <ul>
+              {[
+                ["Date", "date"],
+                ["Time", "time"],
+                ["Dinners", "dinners"],
+                ["Occasion", "occasion"],
+                ["Seating options", "seatingOptions"],
+                ["Special request", "specialRequest"],
+              ].map((row) => (
+                <li>
+                  <span className="text-strong">{row[0]}:</span>{" "}
+                  {formData[0][row[1]]}
+                </li>
+              ))}
+            </ul>
+          </CardBookingRecap>
+        </div>
       </Section>
     </>
   );

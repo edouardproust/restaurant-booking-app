@@ -5,7 +5,7 @@ import TableDetails from "./TableDetails";
 import Confirmation from "./Confirmation";
 
 export default function Booking() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState([]);
   const [step, setStep] = useState(1);
 
   const updateStep = (action = "next") => {
