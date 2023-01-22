@@ -1,10 +1,10 @@
 import { useState } from "react";
 // Components
 import PersonalDetails from "./PersonalDetails";
-import TableDetails from "./TableDetails";
+import BookingForm from "./TableDetails";
 import Confirmation from "./Confirmation";
 
-export default function Booking() {
+export default function BookingWithSteps() {
   const [formData, setFormData] = useState([]);
   const [step, setStep] = useState(1);
 
@@ -24,7 +24,7 @@ export default function Booking() {
   return (
     <>
       {step === 1 ? (
-        <TableDetails updateStep={updateStep} setFormData={setFormData} />
+        <BookingForm updateStep={updateStep} setFormData={setFormData} />
       ) : step === 2 ? (
         <PersonalDetails
           updateStep={updateStep}

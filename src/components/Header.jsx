@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import Nav from "./Nav";
 
-export default function Header({ mainMenu }) {
+export default function Header({ mainMenu, multiStepsBooking }) {
   return (
     <header>
       <div className="section-container block">
@@ -10,7 +10,7 @@ export default function Header({ mainMenu }) {
           <Link to="/" className="img-link">
             <img src={logo} alt="Logo" />
           </Link>
-          <Nav mainMenu={mainMenu} />
+          <Nav mainMenu={mainMenu} multiStepsBooking={multiStepsBooking} />
         </div>
       </div>
     </header>

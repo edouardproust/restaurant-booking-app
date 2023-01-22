@@ -36,9 +36,20 @@ select {
 .form-group {
   flex: 1;
   margin-bottom: space(1);
+  label:nth-child(1) {
+    font-weight: 900;
+    color: $color-primary-dark;
+    margin-bottom: 4px;
+  }
 }
 
 .input-error {
   color: red;
   font-size: 0.8rem;
+}
+
+.cvv {
+  display: flex;
+  align-items: center;
+  width: 80px;
 }

@@ -7,11 +7,22 @@
   background-position: center;
 }
 
+#notFound {
+  background-color: $color-primary-dark;
+}
+
 #pageTitle {
   color: $color-secondary-3;
   background-attachment: fixed;
   *:last-child {
     margin-bottom: 0;
+  }
+}
+
+#notFound {
+  div,
+  p {
+    color: white;
   }
 }
 
@@ -64,10 +75,4 @@
       }
     }
   }
-}
-
-.cvv {
-  display: flex;
-  align-items: center;
-  width: 80px;
 }

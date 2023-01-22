@@ -10,15 +10,15 @@ export default function Nav({ mainMenu }) {
     <>
       <nav>
         <ul className={`nav-menu ${isMenuActive ? "active" : ""}`}>
-          {mainMenu.map((link) => (
+          {Object.entries(mainMenu).map((link) => (
             <li key={uuid()}>
               <NavLink
-                to={link.route}
+                to={link[1]}
                 className={({ isActive }) =>
                   `text-strong ${isActive ? "active" : ""}`
                 }
                 onClick={() => setIsMenuActive(false)}>
-                {link.label}
+                {link[0]}
               </NavLink>
             </li>
           ))}

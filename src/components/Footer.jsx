@@ -31,9 +31,9 @@ export default function Footer({ mainMenu, siteName }) {
           <div className="col">
             <h3>Links</h3>
             <ul>
-              {mainMenu.map((link) => (
+              {Object.entries(mainMenu).map((link) => (
                 <li key={uuid()}>
-                  <Link to={link.route}>{link.label}</Link>
+                  <Link to={link[1]}>{link[0]}</Link>
                 </li>
               ))}
             </ul>

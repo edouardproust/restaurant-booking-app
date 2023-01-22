@@ -7,30 +7,45 @@ import Homepage from "./components/pages/Home";
 import About from "./components/pages/About";
 import Order from "./components/pages/Order";
 import Login from "./components/pages/Login";
-import Booking from "./components/pages/Booking/Booking";
+import Booking from "./components/pages/Booking";
+import BookingWithSteps from "./components/pages/BookingWithSteps";
+import Page404 from "./components/pages/404";
 
+// Global Settings
 const siteName = "Little Lemon Chicago";
+const mainMenu = {
+  Home: "/",
+  About: "/about",
+  Booking: "/booking",
+  "Order online": "/order",
+  Login: "/login",
+};
+const multiStepsBooking = false;
 
+// App
 function App() {
-  const mainMenu = [
-    { label: "Home", route: "/" },
-    { label: "About", route: "/about" },
-    { label: "Booking", route: "/booking" },
-    { label: "Order online", route: "/order" },
-    { label: "Login", route: "/login" },
-  ];
+  const updatedMainMenu = multiStepsBooking
+    ? { ...mainMenu, Booking: "/booking-steps" }
+    : { ...mainMenu };
 
   return (
     <>
-      <Header mainMenu={mainMenu} />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-      <Footer mainMenu={mainMenu} siteName={siteName} />
+      <Header mainMenu={updatedMainMenu} />
+      <main>
+        <Routes>
+          <Route path="*" element={<Page404 />} />
+          <Route path="/" element={<Homepage links={updatedMainMenu} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/order" element={<Order />} />
+          {multiStepsBooking ? (
+            <Route path="/booking-steps" element={<BookingWithSteps />} />
+          ) : (
+            <Route path="/booking" element={<Booking />} />
+          )}
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </main>
+      <Footer mainMenu={updatedMainMenu} siteName={siteName} />
     </>
   );
 }

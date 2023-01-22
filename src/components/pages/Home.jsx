@@ -20,7 +20,7 @@ import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import PageTitle from "../SectionPageTitle";
 
-export default function Homepage() {
+export default function Homepage({ links }) {
   const dishes = [
     {
       name: "Greek Salad",
@@ -70,7 +70,7 @@ export default function Homepage() {
   ];
 
   return (
-    <main>
+    <>
       <PageTitle>
         <h1 className="light">
           Little Lemon<div>Chicago</div>
@@ -80,7 +80,7 @@ export default function Homepage() {
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Euismod
           elementum nisi quis.
         </p>
-        <Link to="/booking">
+        <Link to={links["Booking"]}>
           <Button>Reserve a table</Button>
         </Link>
       </PageTitle>
@@ -114,6 +114,6 @@ export default function Homepage() {
         </div>
       </Section>
       <SectionAbout />
-    </main>
+    </>
   );
 }
