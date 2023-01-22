@@ -4,9 +4,9 @@ import YupPassword from "yup-password";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 // Components
-import Button from "../../Button";
-import Section from "../../Section";
-import PageTitle from "../../SectionPageTitle";
+import Button from "../Button";
+import Section from "../Section";
+import PageTitle from "../SectionPageTitle";
 import CardBookingRecap from "./CardBookingRecap";
 
 const PersonalDetails = ({ updateStep, formData, setFormData }) => {

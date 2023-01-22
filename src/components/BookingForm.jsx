@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { dayToString, nextMonthDays } from "../../helpers/dateTime";
+import { dayToString, nextMonthDays } from "../helpers/dateTime";
 // Components
-import Button from "../Button";
+import Button from "./Button";
 
 const BookingForm = ({ data, handleChange, availableTimes, dispatchTimes }) => {
   const availableDates = () =>
@@ -15,6 +15,7 @@ const BookingForm = ({ data, handleChange, availableTimes, dispatchTimes }) => {
           <label htmlFor="date">Choose date</label>
           <select
             id="date"
+            data-testid="date"
             name="date"
             value={data.date}
             onChange={(e) => dispatchTimes({ event: e })}>
@@ -29,6 +30,7 @@ const BookingForm = ({ data, handleChange, availableTimes, dispatchTimes }) => {
           <label htmlFor="time">Choose time</label>
           <select
             id="time"
+            data-testid="time"
             name="time"
             onChange={(e) => handleChange(e, "time")}>
             {availableTimes.map((hour) => (

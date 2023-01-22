@@ -1,16 +1,16 @@
 import { useReducer, useState } from "react";
-import { dayToString, bookingStartDate } from "../../helpers/dateTime";
-import ImagesCol from "../ImagesCol";
-import Section from "../Section";
-import PageTitle from "../SectionPageTitle";
+import { dayToString, bookingStartDate } from "../helpers/dateTime";
+import ImagesCol from "./ImagesCol";
+import Section from "./Section";
+import PageTitle from "./SectionPageTitle";
 // Components
 import BookingForm from "./BookingForm";
 import BookingSuccess from "./BookingSuccess";
 // Images
-import restoIndoor from "../../images/resto-indoor.jpg";
-import cooks from "../../images/cooks.jpg";
+import restoIndoor from "../images/resto-indoor.jpg";
+import cooks from "../images/cooks.jpg";
 
-export default function Booking() {
+export default function PageBooking() {
   const [isSubmitted, setSubmited] = useState(false);
   const [data, setData] = useState({
     date: dayToString(bookingStartDate(), true),
@@ -33,7 +33,7 @@ export default function Booking() {
     setSubmited(true);
   };
 
-  const updateTimeReducer = (state, action) => {
+  const updateTimes = (state, action) => {
     console.log("TODO: Booking::updateTimeReducer");
     console.log("date (action):", action.event.target.value);
     console.log("availableTimes (state):", state);
@@ -42,7 +42,7 @@ export default function Booking() {
   };
 
   const [availableTimes, dispatchTimes] = useReducer(
-    updateTimeReducer,
+    updateTimes,
     initializeTimes()
   );
 

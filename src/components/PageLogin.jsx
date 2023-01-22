@@ -1,7 +1,7 @@
-import PageTitle from "../SectionPageTitle";
-import Plaintext from "../SectionPlainText";
+import PageTitle from "./SectionPageTitle";
+import Plaintext from "./SectionPlainText";
 
-export default function Login() {
+export default function PageLogin() {
   return (
     <>
       <PageTitle title={"Login"} />

@@ -4,13 +4,13 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 // Components
-import Button from "../../Button";
-import Section from "../../Section";
-import PageTitle from "../../SectionPageTitle";
+import Button from "../Button";
+import Section from "../Section";
+import PageTitle from "../SectionPageTitle";
 import SuccessPopup from "./SuccessPopup";
 import valid from "card-validator";
 // Images
-import cvv from "../../../images/cvv.png";
+import cvv from "../../images/cvv.png";
 import CardBookingRecap from "./CardBookingRecap";
 
 const Confirmation = ({ updateStep, formData, setFormData }) => {
