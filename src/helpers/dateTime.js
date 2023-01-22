@@ -1,4 +1,28 @@
-const dayToString = (dateObj, short = false) => {
+const todayBookingDeadline = 17; // max hour to book a table today;
+
+const bookingStartDate = () => {
+  return new Date().getHours() >= todayBookingDeadline
+    ? tomorrowDate()
+    : new Date();
+};
+
+const dayToString = (date, short = false) => {
+  let dateObj;
+  switch (date) {
+    case "today":
+      dateObj = new Date();
+      break;
+    case "tomorrow":
+      dateObj = tomorrowDate();
+      break;
+    default:
+      if (!(date instanceof Date)) {
+        throw new Error(
+          "`date` param must be either `today`, `tomorrow` or a Date object."
+        );
+      }
+      dateObj = date;
+  }
   const month = monthToString(dateObj.getMonth(), short);
   const day = dateObj.getDate();
   return `${month} ${day}`;
@@ -23,16 +47,23 @@ const monthToString = (monthIndex, short = false) => {
 };
 
 const nextMonthDays = () => {
-  const today = new Date();
-  let nextMonth = new Date();
-  nextMonth = nextMonth.setMonth(nextMonth.getMonth() + 1);
-  // Get 30 next days
+  // Check if is earlie than 7pm
+  let startDate = bookingStartDate();
+
+  let endDate = new Date();
+  endDate = endDate.setMonth(endDate.getMonth() + 1);
+  // Get 30 following days
   const days = [];
-  while (today < nextMonth) {
-    days.push(new Date(today));
-    today.setDate(today.getDate() + 1);
+  while (startDate < endDate) {
+    days.push(new Date(startDate));
+    startDate.setDate(startDate.getDate() + 1);
   }
   return days;
 };
 
-export { dayToString, monthToString, nextMonthDays };
+const tomorrowDate = () => {
+  const ts = new Date().setDate(new Date().getDate() + 1);
+  return new Date(ts);
+};
+
+export { bookingStartDate, dayToString, monthToString, nextMonthDays };
