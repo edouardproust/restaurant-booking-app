@@ -1,8 +1,8 @@
-import PageTitle from "../SectionPageTitle";
-import Plaintext from "../SectionPlainText";
-import SectionAbout from "../SectionAbout";
+import PageTitle from "./SectionPageTitle";
+import Plaintext from "./SectionPlainText";
+import SectionAbout from "./SectionAbout";
 
-export default function About() {
+export default function PageAbout() {
   return (
     <>
       <PageTitle title={"About us"} />

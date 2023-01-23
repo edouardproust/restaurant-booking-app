@@ -1,4 +1,4 @@
-import cooks from "../../../images/cooks.jpg";
+import cooks from "../../images/cooks.jpg";
 
 export default function CardBookingRecap({ children }) {
   return (

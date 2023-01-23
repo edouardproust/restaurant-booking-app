@@ -1,26 +1,26 @@
 // Libraries
 import uuid from "react-uuid";
 // Components
-import Section from "../Section";
-import Button from "../Button";
-import CardDish from "../CardDish";
-import CardTestimonial from "../CardTestimonial";
-import SectionAbout from "../SectionAbout";
+import Section from "./Section";
+import Button from "./Button";
+import CardDish from "./CardDish";
+import CardTestimonial from "./CardTestimonial";
+import SectionAbout from "./SectionAbout";
 // Images
-import greekSalad from "../../images/greek-salad.jpeg";
-import bruschetta from "../../images/bruschetta.jpg";
-import lemonDessert from "../../images/lemon-dessert.webp";
-import woman1 from "../../images/woman1.jpg";
-import man1 from "../../images/man1.jpg";
-import man2 from "../../images/man2.jpg";
-import testimonialsBg from "../../images/restaurant-room.jpg";
+import greekSalad from "../images/greek-salad.jpeg";
+import bruschetta from "../images/bruschetta.jpg";
+import lemonDessert from "../images/lemon-dessert.webp";
+import woman1 from "../images/woman1.jpg";
+import man1 from "../images/man1.jpg";
+import man2 from "../images/man2.jpg";
+import testimonialsBg from "../images/restaurant-room.jpg";
 // Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import PageTitle from "../SectionPageTitle";
+import PageTitle from "./SectionPageTitle";
 
-export default function Homepage({ links }) {
+export default function PageHome({ links }) {
   const dishes = [
     {
       name: "Greek Salad",

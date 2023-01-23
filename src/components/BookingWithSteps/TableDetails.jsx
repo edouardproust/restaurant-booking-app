@@ -3,13 +3,13 @@ import * as Yup from "yup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 // Components
-import Button from "../../Button";
-import ImagesCol from "../../ImagesCol";
-import Section from "../../Section";
-import PageTitle from "../../SectionPageTitle";
+import Button from "../Button";
+import ImagesCol from "../ImagesCol";
+import Section from "../Section";
+import PageTitle from "../SectionPageTitle";
 // Images
-import restoIndoor from "../../../images/resto-indoor.jpg";
-import cooks from "../../../images/cooks.jpg";
+import restoIndoor from "../../images/resto-indoor.jpg";
+import cooks from "../../images/cooks.jpg";
 
 const TableDetails = ({ updateStep, setFormData }) => {
   const initialValues = {

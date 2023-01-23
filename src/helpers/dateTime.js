@@ -1,4 +1,18 @@
 const todayBookingDeadline = 17; // max hour to book a table today;
+const monthsOfTheYear = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const bookingStartDate = () => {
   return new Date().getHours() >= todayBookingDeadline
@@ -6,7 +20,23 @@ const bookingStartDate = () => {
     : new Date();
 };
 
-const dayToString = (date, short = false) => {
+const monthToString = (monthIndex, short = false) => {
+  return !short
+    ? monthsOfTheYear[monthIndex]
+    : monthsOfTheYear[monthIndex].slice(0, 3);
+};
+
+const stringToDate = (str) => {
+  let [month, day] = str.split(" ");
+  monthsOfTheYear.forEach((m, i) => {
+    if (month == m.slice(0, 3)) month = i + 1;
+  });
+  const year = new Date().getFullYear();
+  const date = `${year}-${String(month).padStart(2, "0")}-${day}`;
+  return new Date(date);
+};
+
+const dateToString = (date, short = false) => {
   let dateObj;
   switch (date) {
     case "today":
@@ -26,24 +56,6 @@ const dayToString = (date, short = false) => {
   const month = monthToString(dateObj.getMonth(), short);
   const day = dateObj.getDate();
   return `${month} ${day}`;
-};
-
-const monthToString = (monthIndex, short = false) => {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  return !short ? months[monthIndex] : months[monthIndex].slice(0, 3);
 };
 
 const nextMonthDays = () => {
@@ -66,4 +78,10 @@ const tomorrowDate = () => {
   return new Date(ts);
 };
 
-export { bookingStartDate, dayToString, monthToString, nextMonthDays };
+export {
+  bookingStartDate,
+  stringToDate,
+  dateToString,
+  monthToString,
+  nextMonthDays,
+};

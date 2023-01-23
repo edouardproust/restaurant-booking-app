@@ -3,7 +3,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Button from "../Button";
 
-const BookingSuccess = () => {
+const SuccessPopup = () => {
   return (
     <div className="popup-container">
       <Link to="/">
@@ -57,4 +57,4 @@ const BookingSuccess = () => {
   );
 };
 
-export default BookingSuccess;
+export default SuccessPopup;

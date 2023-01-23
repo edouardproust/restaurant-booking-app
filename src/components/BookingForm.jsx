@@ -1,42 +1,77 @@
+import { useState } from "react";
+import { dateToString, nextMonthDays } from "../helpers/dateTime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { dayToString, nextMonthDays } from "../../helpers/dateTime";
 // Components
-import Button from "../Button";
+import Button from "./Button";
 
-const BookingForm = ({ data, handleChange, availableTimes, dispatchTimes }) => {
+const BookingForm = ({ setSubmited, data, setData, getSlots }) => {
+  const [slots, setSlots] = useState(getSlots());
+
+  const handleChange = (e, fieldId) => {
+    setData({ ...data, [fieldId]: e.target.value });
+  };
+
+  const updateSlots = (e) => {
+    // Update date input value
+    handleChange(e, "date");
+    // Update times input options
+    const slots = getSlots(e);
+    setSlots(slots);
+    // reset selected slot to first one
+  };
+
   const availableDates = () =>
-    nextMonthDays().map((date) => dayToString(date, true));
+    nextMonthDays().map((date) => dateToString(date, true));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmited(true);
+  };
+
+  const getIsValid = () => {
+    return (
+      data.date &&
+      data.time &&
+      data.dinners > 0 &&
+      (!data.specialRequest || data.specialRequest.length >= 10)
+    );
+  };
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div className="row">
         <div className="form-group">
           <label htmlFor="date">Choose date</label>
           <select
             id="date"
+            data-testid="date"
             name="date"
             value={data.date}
-            onChange={(e) => dispatchTimes({ event: e })}>
+            onChange={updateSlots}>
             {availableDates().map((slot) => (
               <option key={slot} value={slot}>
                 {slot}
               </option>
             ))}
           </select>
+          {!data.date ? <p className="input-error">Required</p> : ""}
         </div>
         <div className="form-group">
           <label htmlFor="time">Choose time</label>
           <select
             id="time"
+            data-testid="time"
             name="time"
-            onChange={(e) => handleChange(e, "time")}>
-            {availableTimes.map((hour) => (
+            onChange={(e) => handleChange(e, "time")}
+            value={data.time}>
+            {slots.map((hour) => (
               <option key={hour} value={hour}>
-                {hour}:00
+                {hour}
               </option>
             ))}
           </select>
+          {!data.time ? <p className="input-error">Required</p> : ""}
         </div>
       </div>
       <div className="form-group">
@@ -50,6 +85,12 @@ const BookingForm = ({ data, handleChange, availableTimes, dispatchTimes }) => {
           max="30"
           onChange={(e) => handleChange(e, "dinners")}
         />
+        {!data.dinners ? <p className="input-error">Required</p> : ""}
+        {data.dinners && data.dinners < 1 ? (
+          <p className="input-error">There must be at least one guest</p>
+        ) : (
+          ""
+        )}
       </div>
       <div className="form-group">
         <label htmlFor="occasion">Occasion</label>
@@ -75,6 +116,7 @@ const BookingForm = ({ data, handleChange, availableTimes, dispatchTimes }) => {
               name="seatingOptions"
               value={option}
               onChange={(e) => handleChange(e, "seatingOptions")}
+              checked={option === data.seatingOptions}
             />
             {option}
           </label>
@@ -90,20 +132,19 @@ const BookingForm = ({ data, handleChange, availableTimes, dispatchTimes }) => {
           onChange={(e) => handleChange(e, "specialRequest")}
           style={{ resize: "none" }}
         />
+        {data.specialRequest && data.specialRequest.length < 10 ? (
+          <p className="input-error">Minimum 10 characters</p>
+        ) : (
+          ""
+        )}
       </div>
       <div className="row">
-        <Button type="submit">
+        <Button type="submit" disabled={!getIsValid()}>
           <FontAwesomeIcon icon={faCheck} />
           Confirm
         </Button>
       </div>
-      <h3>Debug</h3>
-      {Object.entries(data).map(([key, val]) => (
-        <li key={key}>
-          {key}: {val}
-        </li>
-      ))}
-    </>
+    </form>
   );
 };
 
