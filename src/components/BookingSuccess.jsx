@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import Button from "./Button";
 import CardBookingRecap from "./BookingWithSteps/CardBookingRecap";
 
 const dataLabels = [
@@ -45,7 +44,7 @@ const BookingSuccess = ({ data }) => {
               <h4>Your reservation:</h4>
               <ul>
                 {Object.entries(data).map(([k, val], i) => (
-                  <li>
+                  <li key={k}>
                     <span className="text-strong">{dataLabels[i]}:</span> {val}
                   </li>
                 ))}
