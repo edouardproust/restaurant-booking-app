@@ -1,5 +1,5 @@
 .btn {
-  border: none;
+  border: solid 1px $color-primary-light;
   background-color: $color-primary-light;
   border-radius: 18px;
   padding: 20px 24px;
@@ -16,6 +16,7 @@
     }
   }
   &:hover:not(:disabled) {
+    border: solid 1px $color-primary-dark;
     background-color: $color-primary-dark;
     color: white;
   }

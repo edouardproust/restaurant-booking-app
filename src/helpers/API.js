@@ -21,7 +21,11 @@ const fetchAPI = function (date) {
   }
   return result;
 };
-const submitAPI = function (formData) {
+const submitAPI = async function (formData) {
+  const waitFor = (delay) =>
+    new Promise((resolve) => setTimeout(resolve, delay));
+  await waitFor(1000);
+  console.log(formData);
   return true;
 };
 
