@@ -14,6 +14,7 @@
 #pageTitle {
   color: $color-secondary-3;
   background-attachment: fixed;
+  clip-path: ellipse($section-round-border 100% at top);
   *:last-child {
     margin-bottom: 0;
   }

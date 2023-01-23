@@ -1,4 +1,5 @@
 footer {
+  clip-path: ellipse($section-round-border 100% at bottom);
   position: relative;
   background-size: cover;
   background-position: center;
