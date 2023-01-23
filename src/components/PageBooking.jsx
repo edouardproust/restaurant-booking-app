@@ -4,7 +4,7 @@ import {
   stringToDate,
   bookingStartDate,
 } from "../helpers/dateTime";
-import { fetchAPI } from "../helpers/API";
+import { fetchAPI, submitAPI } from "../helpers/API";
 // Components
 import BookingForm from "./BookingForm";
 import BookingSuccess from "./BookingSuccess";
@@ -17,6 +17,7 @@ import cooks from "../images/cooks.jpg";
 
 export default function PageBooking() {
   const [isSubmitted, setSubmited] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getSlots = (e = null) => {
     const slots = fetchAPI(
@@ -34,6 +35,15 @@ export default function PageBooking() {
     specialRequest: "",
   });
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    if (await submitAPI(data)) {
+      setSubmited(true);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <div className={`popup ${!isSubmitted ? "hidden" : ""}`}>
@@ -47,10 +57,11 @@ export default function PageBooking() {
               Please fill in the details concerning your reservation.
             </p>
             <BookingForm
-              setSubmited={setSubmited}
+              handleSubmit={handleSubmit}
               data={data}
               setData={setData}
               getSlots={getSlots}
+              isLoading={isLoading}
             />
           </div>
           <div className="col">

@@ -29,7 +29,7 @@ const monthToString = (monthIndex, short = false) => {
 const stringToDate = (str) => {
   let [month, day] = str.split(" ");
   monthsOfTheYear.forEach((m, i) => {
-    if (month == m.slice(0, 3)) month = i + 1;
+    if (month === m.slice(0, 3)) month = i + 1;
   });
   const year = new Date().getFullYear();
   const date = `${year}-${String(month).padStart(2, "0")}-${day}`;

@@ -5,7 +5,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 // Components
 import Button from "./Button";
 
-const BookingForm = ({ setSubmited, data, setData, getSlots }) => {
+const BookingForm = ({ handleSubmit, data, setData, getSlots, isLoading }) => {
   const [slots, setSlots] = useState(getSlots());
 
   const handleChange = (e, fieldId) => {
@@ -18,16 +18,10 @@ const BookingForm = ({ setSubmited, data, setData, getSlots }) => {
     // Update times input options
     const slots = getSlots(e);
     setSlots(slots);
-    // reset selected slot to first one
   };
 
   const availableDates = () =>
     nextMonthDays().map((date) => dateToString(date, true));
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmited(true);
-  };
 
   const getIsValid = () => {
     return (
@@ -139,9 +133,9 @@ const BookingForm = ({ setSubmited, data, setData, getSlots }) => {
         )}
       </div>
       <div className="row">
-        <Button type="submit" disabled={!getIsValid()}>
+        <Button type="submit" disabled={!getIsValid() || isLoading}>
           <FontAwesomeIcon icon={faCheck} />
-          Confirm
+          {isLoading ? "Loading..." : "Confirm"}
         </Button>
       </div>
     </form>
